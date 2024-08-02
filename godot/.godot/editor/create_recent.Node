@@ -1,5 +1,6 @@
-Node3D
 MeshInstance3D
+WorldEnvironment
+Node3D
 Area3D
 TextureButton
 Control

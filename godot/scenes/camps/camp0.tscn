@@ -1,12 +1,33 @@
-[gd_scene load_steps=8 format=3 uid="uid://dmjsl2no3vy6c"]
+[gd_scene load_steps=16 format=3 uid="uid://dmjsl2no3vy6c"]
 
 [ext_resource type="Script" path="res://scenes/camps/selector.gd" id="1_ejdxb"]
+[ext_resource type="Texture2D" uid="uid://dx3i8t2p2wp1e" path="res://assets/hdri_maps/DayEnvironmentHDRI043_4K-HDR.exr" id="1_nhvhb"]
 [ext_resource type="Texture2D" uid="uid://caqggnybnmstq" path="res://assets/texture_icon_residential_building1/icon.png" id="2_2u6tm"]
+[ext_resource type="Texture2D" uid="uid://bqejs5lp8m5pn" path="res://assets/texture_grass/Grass001_4K-JPG_Color.jpg" id="2_hxqml"]
+[ext_resource type="Texture2D" uid="uid://7n681bnmvomw" path="res://assets/texture_grass/Grass001_4K-JPG_AmbientOcclusion.jpg" id="3_i7j17"]
+[ext_resource type="Texture2D" uid="uid://dtaosql1nnml" path="res://assets/texture_grass/Grass001_4K-JPG_NormalGL.jpg" id="4_sx8g0"]
+[ext_resource type="Texture2D" uid="uid://d18rmodbiumrl" path="res://assets/texture_grass/Grass001_4K-JPG_Roughness.jpg" id="5_x6bxh"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_60q3m"]
+panorama = ExtResource("1_nhvhb")
+
+[sub_resource type="Sky" id="Sky_0cchc"]
+sky_material = SubResource("PanoramaSkyMaterial_60q3m")
+
+[sub_resource type="Environment" id="Environment_mliqc"]
+background_mode = 2
+sky = SubResource("Sky_0cchc")
 
 [sub_resource type="PlaneMesh" id="2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dfybw"]
 albedo_color = Color(0.304703, 0.489508, 0.210467, 1)
+albedo_texture = ExtResource("2_hxqml")
+roughness_texture = ExtResource("5_x6bxh")
+normal_enabled = true
+normal_texture = ExtResource("4_sx8g0")
+ao_enabled = true
+ao_texture = ExtResource("3_i7j17")
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_rh6c6"]
 data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
@@ -20,12 +41,19 @@ height = 161.459
 
 [node name="Builds" type="Node3D" parent="."]
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mliqc")
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.651357, -0.541871, 0.53114, 0, 0.7, 0.714143, -0.758771, -0.465162, 0.45595, 4.24487, 234.053, 362.417)
+transform = Transform3D(0.994703, -0.0734425, 0.0719202, 0, 0.699663, 0.714473, -0.102793, -0.710688, 0.695957, 641.263, 368.163, -284.124)
 shadow_enabled = true
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1800, 0, 0, 0, 1800, 0, 0, 0, 1800, 0, 0, 0)
+skeleton = NodePath("../Ground")
+
 [node name="Ground" type="MeshInstance3D" parent="."]
-transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 1000, 0, 0, 0)
+transform = Transform3D(1800, 0, 0, 0, 1800, 0, 0, 0, 1800, 0, 0, 0)
 mesh = SubResource("2")
 surface_material_override/0 = SubResource("StandardMaterial3D_dfybw")
 
@@ -43,7 +71,10 @@ mesh = SubResource("1")
 skeleton = NodePath("../..")
 
 [node name="Camera3D" type="Camera3D" parent="SelectorChar/Selector"]
-transform = Transform3D(-0.198604, -0.0634506, 0.137951, 0, 0.227127, 0.104467, -0.151844, 0.0829899, -0.180433, 6.04373, 4.43621, -8.26506)
+transform = Transform3D(-0.00707107, -0.005, 0.005, 0, 0.00707107, 0.00707107, -0.00707107, 0.005, -0.005, 2.55301, 4.541, -3.70974)
+projection = 1
+current = true
+size = 1200.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SelectorChar"]
 shape = SubResource("CapsuleShape3D_enarj")
@@ -56,16 +87,25 @@ shape = SubResource("CapsuleShape3D_enarj")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-offset_left = 20.0
+offset_left = 12.0
 offset_top = 21.0
-offset_right = 120.0
+offset_right = 128.0
 offset_bottom = 631.0
 color = Color(0, 0, 0, 0.341176)
 
 [node name="TextureButton" type="TextureButton" parent="CanvasLayer/ColorRect"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -49.855
+offset_top = -295.0
+offset_right = 50.145
+offset_bottom = -195.0
+grow_horizontal = 2
+grow_vertical = 2
 texture_normal = ExtResource("2_2u6tm")
 texture_pressed = ExtResource("2_2u6tm")
 texture_hover = ExtResource("2_2u6tm")
