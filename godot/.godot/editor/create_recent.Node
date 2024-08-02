@@ -1,0 +1,11 @@
+Node3D
+MeshInstance3D
+Area3D
+TextureButton
+Control
+ColorRect
+CanvasLayer
+RigidBody3D
+CollisionShape3D
+RayCast3D
+CharacterBody3D
