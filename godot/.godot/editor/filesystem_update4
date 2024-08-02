@@ -1,6 +1,4 @@
 res://default_env.tres
-res://scenes/camps/camp0.tscn
-res://assets/predios/gltf-20240801T231318Z-001/gltf/M_PolygonCity_01_A.material
-res://scenes/buildings/ResidentialBuilding1.tscn
-res://scenes/camps/selector.gd
-res://scenes/buildings/ResidentialBuilding1.gd
+res://scenes/character_movementation/test.tscn
+res://scenes/character_movementation/character_movementation.tscn
+res://scenes/character_movementation/character_movementation.gd

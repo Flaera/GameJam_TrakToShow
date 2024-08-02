@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://dd5835fh5kifs"]
+
+[ext_resource type="Script" path="res://scenes/character_movementation/character_movementation.gd" id="1_y63hf"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ou6ue"]
+
+[sub_resource type="Sky" id="Sky_fux2o"]
+sky_material = SubResource("ProceduralSkyMaterial_ou6ue")
+
+[sub_resource type="Environment" id="Environment_8msay"]
+background_mode = 2
+sky = SubResource("Sky_fux2o")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_5o5wo"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5k71x"]
+
+[node name="CharacterMovementation" type="CharacterBody3D"]
+script = ExtResource("1_y63hf")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8msay")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.947546, 0.167059, -0.272487, 0.319621, -0.49526, 0.807812, 0, -0.852531, -0.522677, -30.0599, 37.1718, -5.15863)
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_5o5wo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_5k71x")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.469472, 0.40085, -0.786712, 0, 0.891007, 0.453991, 0.882948, -0.213136, 0.418302, -33.6988, 20, 18)
+projection = 1
+size = 14.386
+
+[node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
+target_position = Vector3(0, 0, -200)
